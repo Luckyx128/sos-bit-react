@@ -9,12 +9,17 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
     useEffect(() => {
+        try {
         const ws = new WebSocket('ws://localhost:8080/ws')
         ws.onopen = () => {
             console.log('Connection opened')
         }
         ws.onmessage = (event) => {
             console.log('Received message', event)
+        }
+
+        }catch (e){
+            console.log('Error on connection', e)
         }
     }, []);
   return (
